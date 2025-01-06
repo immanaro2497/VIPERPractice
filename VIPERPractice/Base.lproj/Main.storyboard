@@ -1,24 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="VIPERPractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCC-EL-T3x">
+                                <rect key="frame" x="171.66666666666666" y="139" width="50" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="B6a-s7-F7p"/>
+                                    <constraint firstAttribute="height" constant="36" id="V89-81-JH0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="pIe-3y-BuT">
+                                <rect key="frame" x="122.66666666666669" y="225" width="148" height="34.333333333333314"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRY-26-371">
+                                        <rect key="frame" x="0.0" y="0.0" width="49" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" image="plus.app.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="onIncrement:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8ql-Aw-6vf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xe8-V7-4fW">
+                                        <rect key="frame" x="98.999999999999986" y="0.0" width="49.000000000000014" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" image="minus.square.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="onDecrement:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bc5-Ht-iXW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UK-fc-5Po">
+                                <rect key="frame" x="166" y="309.33333333333331" width="61" height="34.333333333333314"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="View"/>
+                                <connections>
+                                    <action selector="viewCount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fTe-gj-IE4"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pIe-3y-BuT" firstAttribute="top" secondItem="HCC-EL-T3x" secondAttribute="bottom" constant="50" id="2LC-HB-y76"/>
+                            <constraint firstItem="pIe-3y-BuT" firstAttribute="centerX" secondItem="HCC-EL-T3x" secondAttribute="centerX" id="CFa-dk-Asz"/>
+                            <constraint firstItem="0UK-fc-5Po" firstAttribute="top" secondItem="pIe-3y-BuT" secondAttribute="bottom" constant="50" id="N8Q-6S-T95"/>
+                            <constraint firstItem="HCC-EL-T3x" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="fV5-rD-bHN"/>
+                            <constraint firstItem="HCC-EL-T3x" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pbN-Cj-HaN"/>
+                            <constraint firstItem="0UK-fc-5Po" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="tal-Nf-NQp"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="9yJ-vc-d3T"/>
+                    <connections>
+                        <outlet property="countLabel" destination="HCC-EL-T3x" id="VpG-Sp-GTb"/>
+                        <outlet property="decrementButton" destination="xe8-V7-4fW" id="tpL-SJ-aoe"/>
+                        <outlet property="incrementButton" destination="bRY-26-371" id="GXR-yW-8Ym"/>
+                        <outlet property="viewCount" destination="0UK-fc-5Po" id="YF5-Dh-nSQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1008.3969465648854" y="3.5211267605633805"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="minus.square.fill" catalog="system" width="128" height="114"/>
+        <image name="plus.app.fill" catalog="system" width="128" height="114"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
