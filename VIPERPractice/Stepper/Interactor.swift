@@ -1,27 +1,28 @@
 //
-//  Presenter.swift
+//  Interactor.swift
 //  VIPERPractice
 //
-//  Created by Immanuel on 06/01/25.
+//  Created by Immanuel on 07/01/25.
 //
 
 import Foundation
 
-protocol CountView: AnyObject {
-    func display(_ count: String)
+// Interactor to Presenter
+protocol InteractorToPresenterProtocol: AnyObject {
+    func showCurrentCount(_ count: String)
 }
 
-class Presenter {
+class Interactor {
     
-    weak var countView: CountView?
+    weak var presenter: InteractorToPresenterProtocol?
     
-    init(countView: CountView?) {
-        self.countView = countView
-    }
+}
+
+extension Interactor: PresenterToInteractorProtocol {
     
-    func loadData() {
+    func getCount() {
         let count = UserDefaults.standard.value(forKey: "count") as? Int ?? 0
-        countView?.display(String(count))
+        presenter?.showCurrentCount(String(count))
     }
     
     func incrementCount() {
@@ -29,7 +30,7 @@ class Presenter {
         
         UserDefaults.standard.setValue(count, forKey: "count")
         
-        countView?.display(String(count))
+        presenter?.showCurrentCount(String(count))
     }
     
     func decrementCount() {
@@ -37,7 +38,7 @@ class Presenter {
         
         UserDefaults.standard.setValue(count, forKey: "count")
         
-        countView?.display(String(count))
+        presenter?.showCurrentCount(String(count))
     }
     
 }

@@ -22,7 +22,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as! ViewController
         
-        controller.presenter = Presenter(countView: controller)
+        let presenter = Presenter()
+        presenter.view = controller
+        
+        let interactor = Interactor()
+        interactor.presenter = presenter
+        presenter.interactor = interactor
+        
+        let router = Router()
+        router.presenter = presenter
+        presenter.router = router
+        
+        controller.presenter = presenter
         
         window.rootViewController = UINavigationController(rootViewController: controller)
         self.window = window
