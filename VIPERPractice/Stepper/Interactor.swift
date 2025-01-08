@@ -15,7 +15,11 @@ protocol InteractorToPresenterProtocol: AnyObject {
 class Interactor {
     
     weak var presenter: InteractorToPresenterProtocol?
-    let countStore: CountStore = UserDefaultsStore()
+    let countStore: CountStore
+    
+    init(countStore: CountStore) {
+        self.countStore = countStore
+    }
     
 }
 

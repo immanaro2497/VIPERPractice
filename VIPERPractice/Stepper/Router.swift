@@ -18,7 +18,9 @@ class Router: PresenterToRouterProtocol {
             let checkCountPresenter = CheckCountPresenter()
             checkCountPresenter.view = checkCountViewController
             
-            let checkCountInteractor = CheckCountInteractor()
+            let countStore = UserDefaultsStore()
+            
+            let checkCountInteractor = CheckCountInteractor(countStore: countStore)
             checkCountInteractor.presenter = checkCountPresenter
             checkCountPresenter.interactor = checkCountInteractor
             

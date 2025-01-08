@@ -13,7 +13,11 @@ protocol CheckCountInteractorToPresenterProtocol: AnyObject {
 
 class CheckCountInteractor {
     weak var presenter: CheckCountInteractorToPresenterProtocol?
-    let countStore: CountStore = UserDefaultsStore()
+    let countStore: CountStore
+    
+    init(countStore: CountStore) {
+        self.countStore = countStore
+    }
 }
 
 extension CheckCountInteractor: CheckCountPresenterToInteractorProtocol {

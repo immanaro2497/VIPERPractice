@@ -25,7 +25,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let presenter = Presenter()
         presenter.view = controller
         
-        let interactor = Interactor()
+        let countStore = UserDefaultsStore()
+        
+        let interactor = Interactor(countStore: countStore)
         interactor.presenter = presenter
         presenter.interactor = interactor
         

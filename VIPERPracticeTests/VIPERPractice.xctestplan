@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "31BB54B5-1BC0-44A5-9F9D-1DBAC7DF590D",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:VIPERPractice.xcodeproj",
+        "identifier" : "1821CC9C2D2E760A0093E2E4",
+        "name" : "VIPERPracticeTests"
+      }
+    }
+  ],
+  "version" : 1
+}
