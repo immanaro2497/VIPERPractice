@@ -15,10 +15,12 @@ protocol CheckCountPresenterToInteractorProtocol: AnyObject {
     func getCount()
 }
 
-class CheckCountPresenter {
+class CheckCountPresenter: ObservableObject {
     
     weak var view: CheckCountPresenterToViewProtocol?
     var interactor: CheckCountPresenterToInteractorProtocol?
+    
+    @Published var count: String = ""
     
 }
 

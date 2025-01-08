@@ -24,11 +24,13 @@ protocol PresenterToRouterProtocol: AnyObject {
     func pushCheckCountView(parentView: PresenterToViewProtocol?)
 }
 
-class Presenter {
+class Presenter: ObservableObject {
     
     weak var view: PresenterToViewProtocol?
     var interactor: PresenterToInteractorProtocol?
     var router: PresenterToRouterProtocol?
+    
+    @Published var count: String = ""
     
 }
 
