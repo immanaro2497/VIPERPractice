@@ -32,7 +32,8 @@ extension CheckCountPresenter: CheckCountViewToPresenterProtocol {
 
 extension CheckCountPresenter: CheckCountInteractorToPresenterProtocol {
     
-    func showCurrentCount(_ count: String) {
+    func showCurrentCount(_ count: Int?) {
+        let count = String(count ?? 0)
         view?.display(count)
     }
     

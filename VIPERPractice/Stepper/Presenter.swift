@@ -54,7 +54,8 @@ extension Presenter: ViewToPresenterProtocol {
 
 extension Presenter: InteractorToPresenterProtocol {
     
-    func showCurrentCount(_ count: String) {
+    func showCurrentCount(_ count: Int?) {
+        let count = String(count ?? 0)
         view?.display(count)
     }
     

@@ -9,36 +9,35 @@ import Foundation
 
 // Interactor to Presenter
 protocol InteractorToPresenterProtocol: AnyObject {
-    func showCurrentCount(_ count: String)
+    func showCurrentCount(_ count: Int?)
 }
 
 class Interactor {
     
     weak var presenter: InteractorToPresenterProtocol?
+    let countStore: CountStore = UserDefaultsStore()
     
 }
 
 extension Interactor: PresenterToInteractorProtocol {
     
     func getCount() {
-        let count = UserDefaults.standard.value(forKey: "count") as? Int ?? 0
-        presenter?.showCurrentCount(String(count))
+        let count = countStore.fetchCount()
+        presenter?.showCurrentCount(count)
     }
     
     func incrementCount() {
-        let count = (UserDefaults.standard.value(forKey: "count") as? Int ?? 0) + 1
+        let count = (countStore.fetchCount() ?? 0) + 1
         
-        UserDefaults.standard.setValue(count, forKey: "count")
-        
-        presenter?.showCurrentCount(String(count))
+        countStore.updateCount(count)
+        presenter?.showCurrentCount(count)
     }
     
     func decrementCount() {
-        let count = (UserDefaults.standard.value(forKey: "count") as? Int ?? 0) - 1
+        let count = (countStore.fetchCount() ?? 0) - 1
         
-        UserDefaults.standard.setValue(count, forKey: "count")
-        
-        presenter?.showCurrentCount(String(count))
+        countStore.updateCount(count)
+        presenter?.showCurrentCount(count)
     }
     
 }
