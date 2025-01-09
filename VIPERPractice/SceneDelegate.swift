@@ -24,16 +24,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let countViewModel = CountViewModel(countStore: countStore)
         let countView = CountView(countViewModel: countViewModel, onSelectView: { [weak self] in
             guard let self else { return }
-            
-            let checkCountViewModel = CheckCountViewModel(countStore: self.countStore)
-            let checkCountView = CheckCountView(checkCountViewModel: checkCountViewModel)
-            navigationController.pushViewController(UIHostingController(rootView: checkCountView), animated: true)
+            self.showCheckCountView()
         })
         navigationController.setViewControllers([UIHostingController(rootView: countView)], animated: true)
         window.rootViewController = navigationController
         self.window = window
         window.makeKeyAndVisible()
         
+    }
+    
+    private func showCheckCountView() {
+        let checkCountViewModel = CheckCountViewModel(countStore: countStore)
+        let checkCountView = CheckCountView(checkCountViewModel: checkCountViewModel)
+        navigationController.pushViewController(UIHostingController(rootView: checkCountView), animated: true)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
