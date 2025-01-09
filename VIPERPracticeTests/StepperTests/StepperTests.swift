@@ -9,42 +9,33 @@ import XCTest
 @testable import VIPERPractice
 
 final class StepperTests: XCTestCase {
-    private var presenter: ViewToPresenterProtocol!
-    private var view: PresenterToViewProtocol!
+    private var countViewModel: CountViewModel!
     
     func test_loadData() {
-        presenter.loadData()
+        countViewModel.loadData()
         
-        XCTAssertEqual(getCountFromView(), "0")
+        XCTAssertEqual(countViewModel.count, "0")
     }
     
     func test_incrementCount() {
-        presenter.incrementCount()
+        countViewModel.incrementCount()
         
-        XCTAssertEqual(getCountFromView(), "1")
+        XCTAssertEqual(countViewModel.count, "1")
     }
     
     func test_decrementCount() {
-        presenter.incrementCount()
-        presenter.decrementCount()
+        countViewModel.incrementCount()
+        countViewModel.decrementCount()
         
-        XCTAssertEqual(getCountFromView(), "0")
+        XCTAssertEqual(countViewModel.count, "0")
     }
     
     func test_incrementCountTwice() {
-        presenter.incrementCount()
-        XCTAssertEqual(getCountFromView(), "1")
+        countViewModel.incrementCount()
+        XCTAssertEqual(countViewModel.count, "1")
         
-        presenter.incrementCount()
-        XCTAssertEqual(getCountFromView(), "2")
-    }
-    
-    // MARK: Helper
-    func getCountFromView() -> String? {
-        if let stepperViewSpy = view as? StepperViewSpy {
-            return stepperViewSpy.count
-        }
-        return nil
+        countViewModel.incrementCount()
+        XCTAssertEqual(countViewModel.count, "2")
     }
 
 }
@@ -52,24 +43,11 @@ final class StepperTests: XCTestCase {
 extension StepperTests {
     
     override func setUp() {
-        
-        let stepperPresenter = Presenter()
-        
-        view = StepperViewSpy()
-        stepperPresenter.view = view
-        
-        let mockCountStore: CountStore = MockCountStore()
-        
-        let interactor = Interactor(countStore: mockCountStore)
-        stepperPresenter.interactor = interactor
-        interactor.presenter = stepperPresenter
-        
-        presenter = stepperPresenter
+        countViewModel = CountViewModel(countStore: MockCountStore())
     }
     
     override func tearDown() {
-        presenter = nil
-        view = nil
+        countViewModel = nil
     }
     
 }

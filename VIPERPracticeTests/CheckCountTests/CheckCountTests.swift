@@ -9,36 +9,24 @@ import XCTest
 @testable import VIPERPractice
 
 final class CheckCountTests: XCTestCase {
-    private var presenter: CheckCountViewToPresenterProtocol!
-    private var view: CheckCountPresenterToViewProtocol!
+    private var checkCountViewModel: CheckCountViewModel!
     
     func test_loadDataWithZero() {
-        presenter.loadData()
+        checkCountViewModel.loadData()
         
-        XCTAssertEqual(getCountFromView(), "0")
+        XCTAssertEqual(checkCountViewModel.count, "0")
     }
     
     func test_loadDataWithNonZero() {
-        setCountToView(11)
-        presenter.loadData()
+        setCountToViewModel(11)
+        checkCountViewModel.loadData()
         
-        XCTAssertEqual(getCountFromView(), "11")
+        XCTAssertEqual(checkCountViewModel.count, "11")
     }
     
     // MARK: Helper
-    func setCountToView(_ count: Int) {
-        if let checkCountPresenter = presenter as? CheckCountPresenter,
-           let checkCountInteractor = checkCountPresenter.interactor as? CheckCountInteractor,
-           let countStore = checkCountInteractor.countStore as? MockCountStore {
-            countStore.updateCount(count)
-        }
-    }
-    
-    func getCountFromView() -> String? {
-        if let stepperViewSpy = view as? CheckCountViewSpy {
-            return stepperViewSpy.count
-        }
-        return nil
+    func setCountToViewModel(_ count: Int) {
+        checkCountViewModel.countStore.updateCount(count)
     }
     
 }
@@ -46,23 +34,11 @@ final class CheckCountTests: XCTestCase {
 extension CheckCountTests {
     
     override func setUp() {
-        let checkCountPresenter = CheckCountPresenter()
-        
-        view = CheckCountViewSpy()
-        checkCountPresenter.view = view
-        
-        let mockCountStore: CountStore = MockCountStore()
-        
-        let interactor = CheckCountInteractor(countStore: mockCountStore)
-        checkCountPresenter.interactor = interactor
-        interactor.presenter = checkCountPresenter
-        
-        presenter = checkCountPresenter
+        checkCountViewModel = CheckCountViewModel(countStore: MockCountStore())
     }
     
     override func tearDown() {
-        presenter = nil
-        view = nil
+        checkCountViewModel = nil
     }
     
 }
