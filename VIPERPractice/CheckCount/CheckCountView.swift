@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct CheckCountView: View {
-    @StateObject var presenter: CheckCountPresenter
+    @StateObject var checkCountViewModel: CheckCountViewModel
     
     var body: some View {
         VStack(spacing: 50) {
-            Text(presenter.count)
+            Text(checkCountViewModel.count)
                 .frame(width: 50, height: 36)
         }
         .padding(.top, 50)
+        .onAppear {
+            checkCountViewModel.loadData()
+        }
         Spacer()
     }
 }

@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    let navigationController: UINavigationController = UINavigationController()
+    let countStore = UserDefaultsStore()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,25 +21,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateInitialViewController() as! ViewController
-        
-        let presenter = Presenter()
-        presenter.view = controller
-        
-        let countStore = UserDefaultsStore()
-        
-        let interactor = Interactor(countStore: countStore)
-        interactor.presenter = presenter
-        presenter.interactor = interactor
-        
-        let router = Router()
-        router.presenter = presenter
-        presenter.router = router
-        
-        controller.presenter = presenter
-        
-        window.rootViewController = UINavigationController(rootViewController: controller)
+        let countViewModel = CountViewModel(countStore: countStore)
+        let countView = CountView(countViewModel: countViewModel, onSelectView: { [weak self] in
+            guard let self else { return }
+            
+            let checkCountViewModel = CheckCountViewModel(countStore: self.countStore)
+            let checkCountView = CheckCountView(checkCountViewModel: checkCountViewModel)
+            navigationController.pushViewController(UIHostingController(rootView: checkCountView), animated: true)
+        })
+        navigationController.setViewControllers([UIHostingController(rootView: countView)], animated: true)
+        window.rootViewController = navigationController
         self.window = window
         window.makeKeyAndVisible()
         

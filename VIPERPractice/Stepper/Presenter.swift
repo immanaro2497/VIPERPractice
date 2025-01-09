@@ -30,8 +30,6 @@ class Presenter: ObservableObject {
     var interactor: PresenterToInteractorProtocol?
     var router: PresenterToRouterProtocol?
     
-    @Published var count: String = ""
-    
 }
 
 extension Presenter: ViewToPresenterProtocol {
